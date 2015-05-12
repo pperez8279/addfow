@@ -1,0 +1,81 @@
+<div id="print-orders" ng-init="init()">
+	<header>
+		<div class="container">
+			<div class="row">
+				<img class="img-responsive pull-left" ng-src="resources/img/4.png" alt="">
+				<div class="pull-right">
+					<ul class="list-unstyled">
+						<li>Fecha del pedido: <strong>{{ UserCart.parchuse_date }}</strong></li>
+						<li>Productos: <strong>{{ UserCart.total_quantity }}</strong></li>
+						<li>Clientes: <strong>{{ UserCart.customers }}</strong></li>
+					</ul>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</header>
+	<div class="container">
+	    <div class="row">
+        	<table class="table table-condensed">
+			    <thead>
+			        <tr>
+			            <th>
+			            	<span>
+			            		<a href class="icn icn-arrow-up"></a>
+			            		<a href class="icn icn-arrow-down"></a>
+			            	</span>
+			            	Cliente
+			            </th>
+			            <th>
+			            	<span>
+			            		<a href class="icn icn-arrow-up"></a>
+			            		<a href class="icn icn-arrow-down"></a>
+			            	</span>
+			            	Productos
+			            </th>
+			            <th>
+			            	<span>
+			            		<a href class="icn icn-arrow-up"></a>
+			            		<a href class="icn icn-arrow-down"></a>
+			            	</span>
+			            	Cantidad
+			            </th>
+			            <th>
+			            	<span>
+			            		<a href class="icn icn-arrow-up"></a>
+			            		<a href class="icn icn-arrow-down"></a>
+			            	</span>
+			            	precio
+			            </th>
+			        </tr>
+			    </thead>
+			    <tbody ng-repeat="(k, v) in UserCart">
+			        <tr ng-repeat="(k2, v2) in v">
+			            <td><strong>{{ v2.User.first_name + ' ' + v2.User.last_name }}</strong></td>
+			            <td>
+			            	<table>
+			            		<tr ng-repeat="(k3, v3) in v2" ng-if="k3 != 'User' && k3 != 'UserCart'">
+			            			<td>{{ v3.ShopBrochureProduct.code + ' - ' + v3.ShopBrochureProduct.Product.name + ' - ' + v3.ShopBrochureProduct.ShopBrochure.name + ' - ' + v3.ShopBrochureProduct.ShopBrochure.CampaignShopBrochure[0].Campaign.name + ' - ' + v3.ShopBrochureProduct.ShopBrochure.CampaignShopBrochure[0].Campaign.start_date }}</td>
+			            		</tr>
+			            	</table>
+			            </td>
+			            <td>
+			            	<table>
+			            		<tr ng-repeat="(k3, v3) in v2" ng-if="k3 != 'User' && k3 != 'UserCart'">
+			            			<td>{{ v3.quantity }}</td>
+			            		</tr>
+			            	</table>
+			            </td>
+			            <td>
+			            	<table>
+			            		<tr ng-repeat="(k3, v3) in v2" ng-if="k3 != 'User' && k3 != 'UserCart'">
+			            			<td>${{ v3.quantity * v3.ShopBrochureProduct.price }}</td>
+			            		</tr>
+			            	</table>
+			            </td>
+			        </tr>
+			    </tbody>
+			</table>
+	    </div>
+	</div>
+</div>

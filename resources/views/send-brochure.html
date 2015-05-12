@@ -1,0 +1,44 @@
+<div ng-include src="'resources/partials/nav.html'"></div>
+<div id="send-brochure">
+    <div class="container">
+        <div class="row">
+	        <h1>Enviar Catálogo</h1>
+	        <h2>Selecciona a quienes enviar el catálogo online.</h2>
+	        <!-- Custom select -->
+	        <div class="pull-left clearfix select-brochure">
+	        	<ul>
+	        		<!-- Icon arrow down -->
+	        		<i class="icn icn-arrow-down-two"></i>
+                    <!-- Items -->
+                    <li class="col-sm-3" ng-repeat="(k, v) in Brochures" data-value="{{ v.Brochures.ShopBrochure.id }}" ng-click="selectBrochure($event)">
+                        <img class="img-responsive" ng-src="{{ v.Brochures.ShopBrochureImage.name }}">
+                        <span>{{ v.Brochures.ShopBrochure.name }}</span>
+                        {{ v.Campaigns.Campaign.name + ' ' + v.Campaigns.Campaign.start_date }}
+                    </li>
+	        	</ul>
+	        </div>
+	        <div class="pull-right selects">
+	        	<a href ng-click="select('select')">SELECT ALL</a>
+	        	&nbsp;|&nbsp;
+	        	<a href ng-click="select('unselect')">UNSELECT</a>
+	        </div>
+	        <div class="col-md-12 users clearfix">
+	        	<div class="col-xs-6" ng-repeat="(k, v) in Friends">
+        			<div class="user">
+        				<div class="col-xs-10">
+	        				<img ng-src="{{ v.picture.data.url }}">
+		        			<h2>{{ v.name }}</h2>
+		        		</div>
+		        		<div class="col-xs-2">
+	        				<input type="checkbox" value="{{ v.id }}">
+		        		</div>
+        			</div>
+	        	</div>
+	        </div>
+        </div>
+        <div class="row-centered text-center">
+        	<a class="btn btn-danger" href ng-click="send()">Enviar Catálogo</a>
+        	<a class="btn btn-danger send-invite" ng-click="sendInvite()"><span><i class="icn icn-facebook"></i></span>Enviar invitación</a>
+        </div>
+    </div>
+</div>

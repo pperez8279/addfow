@@ -1,0 +1,43 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="javascript:;">
+                <img class="img-responsive" ng-src="resources/img/3.png"  alt="">
+            </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <div class="navbar-right">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown" dropdown ng-controller="NavController">
+                        <a href class="dropdown-toggle" dropdown-toggle>
+                            <img ng-src="{{ User.picture }}">
+                            {{ User.firstName + ' ' + User.lastName }}
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#/send-brochure"                                   ng-if="User.userTypeid == 1">Enviar Catálogo</a>
+                                <a href="#/send-brochure"                                   ng-if="User.userTypeid != 1">Reenviar Catálogo</a>
+                                <a href="#/cart"                                            ng-if="User.userTypeid != 3">Lista de productos ({{ User.cartTotalQuantity }})</a>
+                                <a href="#/orders-by-products"                              ng-if="User.userTypeid == 1">Lista de pedidos por productos ({{ Order.TotalQuantity }})</a>
+                                <a href="#/orders-by-customers"                             ng-if="User.userTypeid == 1">Lista de pedidos por clientes ({{ UserCart.TotalQuantity }})</a>
+                                <a href="#/order-history"                                   ng-if="User.userTypeid == 1">Historial de Pedidos</a>
+                                <a href="#/brochures"                                                                   >Cátalogos Vigentes</a>
+                                <a href="javascript:;"                                                                  >Ayuda</a>
+                                <a ng-controller="UsersController" ng-click="logout()"                                  >Salir</a>
+                                <a ng-controller="ResellerController" ng-click="reseller()" ng-if="User.userTypeid != 1">Soy Revendedora</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <a ng-controller="CartController" ng-click="send()" class="btn btn-danger"  ng-if="User.userTypeid == 2">Enviar Pedido</a>
+            </div>
+        </div>
+    </div>
+</nav>

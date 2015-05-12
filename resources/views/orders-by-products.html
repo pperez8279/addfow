@@ -1,0 +1,48 @@
+<div ng-include src="'resources/partials/nav.html'"></div>
+<div id="cart-client" ng-init="init()">
+    <div class="container">
+        <div class="row" ng-if="ShopBrochure[0]">
+	        <h1>Lista de Productos ({{ Order.TotalQuantity }})</h1>
+	        <div class="pull-right clearfix">
+	        	<a class="btn btn-default" href ng-click="close()">
+	        		<i class="icn icn-print"></i>
+	        		Cerrar e imprimir pedido
+	        	</a>
+	        </div>
+	        <div class="clearfix" ng-repeat="(k, v) in ShopBrochure">
+	        	<div clss="pull-left">
+	        		<div class="pull-left image-brochure">
+	        			<img class="img-responsive" ng-src="{{ v[0].Products[0].ShopBrochure.ShopBrochureImage[0].name }}">
+	        		</div>
+	        		<div class="col-xs-4 detail-brochure">
+		        		<h3>{{ v[0].Products[0].ShopBrochure.name }}</h3>
+		        		<h4>{{ v[0].Products[0].ShopBrochure.CampaignShopBrochure[0].Campaign.name + ' ' + v.UserCartDetail[0].ShopBrochureProduct.ShopBrochure.CampaignShopBrochure[0].Campaign.start_date }}</h4>
+		        		<h5>Vigencia: {{ v[0].Products[0].ShopBrochure.expiration_date }}</h5>
+	        		</div>
+	        		<div class="clearfix"></div>
+	        	</div>
+	        	<div class="clearfix"></div>
+	        	<div class="col-md-12">
+	        		<div class="product clearfix" ng-repeat="(k2, v2) in v">
+		        		<div class="col-xs-2">
+		        			<img ng-src="{{ v2.Products[0].image }}">
+			        	</div>
+			        	<div class="col-xs-6">
+			        		<p>{{ 	v2.Products[0].Product.code }}</p>
+			        		<p>{{ 	v2.Products[0].Product.name }}</p>
+			        		<p>${{ 	v2.Products[0].Product.price }}</p>
+			        		<p>{{ 	v2.Products[0].ShopBrochure.name + '-' + v2.Products[0].ShopBrochure.CampaignShopBrochure[0].Campaign.name + ' ' + v2.Products[0].ShopBrochure.CampaignShopBrochure[0].Campaign.start_date}}</p>
+			        	</div>
+			        	<div class="col-xs-4 actions">
+			        		<input class="form-control" type="number" value="{{ v2.total_quantity }}" readonly>
+			        		<div class="clearfix"></div>
+			        	</div>
+	        		</div>
+	        	</div>
+	        </div>
+        </div>
+		<div class="row" ng-if="!ShopBrochure[0]">
+			<h1>Pedidos por productos: No posee pedidos actualmente.</h1>
+		</div>
+    </div>
+</div>

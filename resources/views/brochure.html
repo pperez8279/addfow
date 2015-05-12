@@ -1,0 +1,61 @@
+<div ng-include src="'resources/partials/nav.html'"></div>
+<div id="brochure">
+    <div class="container">
+        <div class="row">
+        <div class="col-xs-10 col-xs-offset-1">
+		        <div class="col-xs-1 control">
+		        	<a class="left" data-target="#carousel" data-slide="prev">
+						<i class="icn icn-chevron-left"></i>
+					</a>
+		        </div>
+	            <div class="col-xs-10">
+	            	<div id="carousel" class="carousel slide" data-ride="carousel" data-interval="false">
+						<div class="carousel-inner" role="listbox">
+							<div class="item" ng-repeat="(k, v) in Brochure.ShopBrochureImage" ng-if="$index > 0" ng-class="{'active': $index == 1}" data-id="{{ v.id }}">
+							 	<img ng-src="{{ v.url }}">
+							</div>
+						</div>
+					</div>
+	            </div>
+	            <div class="col-xs-1 control">
+	            	<a class="right" data-target="#carousel" data-slide="next">
+						<i class="icn icn-chevron-right"></i>
+					</a>
+					<div class="tools">
+						<a href="javascript:;" class="clearfix" ng-click="zoom('in')">
+							<i class="icn icn-zoom-in"></i>
+						</a>
+						<a href="javascript:;" class="clearfix" ng-click="zoom('out')">
+							<i class="icn icn-zoom-out"></i>
+						</a>
+						<a href="javascript:window.history.back();" class="clearfix">
+							<i class="icn icn-return"></i>
+						</a>
+					</div>
+	            </div>
+	            <div class="col-xs-3 col-xs-offset-1 thumb">
+		            <div class="row">	
+		            	<div class="col-md-3">
+		            		<img class="img-responsive" ng-src="{{Brochure.ShopBrochureImage[0].name}}">
+		            	</div>
+		            	<div class="col-md-9">
+		            		<h1>{{ Brochure.ShopBrochure.name }}</h1>
+		            		<h2>{{ Brochure.Campaign.name + ' ' + Brochure.Campaign.start_date }}</h2>
+		            		<a href="#brochures">VER TODOS</a>
+		            	</div>
+		            </div>
+	            </div>
+	            <div class="col-xs-7 pagination">
+		            <ol class="carousel-indicators pull-right">
+						<li data-target="#carousel" ng-if="$index > 0" data-slide-to="{{$index - 1}}" data-page="{{ $index }}" ng-repeat="(k, v) in Brochure.ShopBrochureImage">
+							<div ng-if="$index == 1" class="pag"></div>
+						</li>
+					</ol>
+					<div class="clearfix"></div>
+					<div class="pull-left">PAGE 1-2</div>
+					<div class="pull-right">PAGE {{ CountPages - 1 +'-' + CountPages }}</div>
+	            </div>
+        	</div>
+        </div>
+    </div>
+</div>

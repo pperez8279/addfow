@@ -1,0 +1,29 @@
+<div ng-include src="'resources/partials/nav.html'"></div>
+<div id="brochures">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+            	<h1>Selecciona un Catálogo</h1>
+                <div class="row row-centered">
+                    <div ng-repeat="(k, v) in Campaigns">
+                        <div ng-repeat="(k2, v2) in v" ng-if="k2 == 'CampaignShopBrochure'">
+                            <div ng-repeat="(k3, v3) in v2">
+                                <article class="col-sm-3">
+                                    <a href="#/brochure/{{ v3.ShopBrochure.id }}">
+                                        <img class="img-responsive" ng-src="{{ v3.ShopBrochureImage.name }}">
+                                    </a>
+                                    <div class="clearfix"></div>
+                                    <h2>{{ v3.ShopBrochure.name }}</h2>
+                                    <div class="clearfix"></div>
+                                    <h3>{{ v.Campaign.name + ' ' + v.Campaign.start_date }}</h3>
+                                    <div class="clearfix"></div>
+                                    <h4>Vigencia {{ v3.ShopBrochure.expiration_date }}</h4>   
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

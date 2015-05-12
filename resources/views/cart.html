@@ -1,0 +1,55 @@
+<div ng-include src="'resources/partials/nav.html'"></div>
+<div id="cart-client" ng-init="init()">
+    <div class="container">
+        <div class="row" ng-if="UserCartDeteail[0]">
+	        <h1>Lista de Productos ({{ User.cartTotalQuantity }})</h1>
+	        <div class="pull-right clearfix" ng-if="User.userTypeid != 1">
+		        <div class="select-reseller">	
+		        	<ul>
+		        		<i class="icn icn-arrow-down-two"></i>
+	                    <li class="col-sm-3" data-value="{{ v.User.id }}" ng-repeat="(k, v) in Reseller" ng-click="selectReseller($event)">
+	                        <img class="img-responsive" ng-src="{{ v.User.picture }}">
+	                        {{ v.User.first_name + ' ' + v.User.last_name }}
+	                    </li>
+		        	</ul>
+		        </div>
+	        </div>
+	        <div class="clearfix" ng-repeat="(k, v) in UserCartDeteail">
+	        	<div clss="pull-left">
+	        		<div class="pull-left image-brochure">
+	        			<img class="img-responsive" ng-src="{{ v.UserCartDetail[0].ShopBrochureProduct.ShopBrochure.ShopBrochureImage[0].name }}">
+	        		</div>
+	        		<div class="col-xs-4 detail-brochure">
+		        		<h3>{{ v.UserCartDetail[0].ShopBrochureProduct.ShopBrochure.name }}</h3>
+		        		<h4>{{ v.UserCartDetail[0].ShopBrochureProduct.ShopBrochure.CampaignShopBrochure[0].Campaign.name + ' ' + v.UserCartDetail[0].ShopBrochureProduct.ShopBrochure.CampaignShopBrochure[0].Campaign.start_date }}</h4>
+		        		<h5>Vigencia: {{ v.UserCartDetail[0].ShopBrochureProduct.ShopBrochure.expiration_date }}</h5>
+	        		</div>
+	        		<div class="clearfix"></div>
+	        	</div>
+	        	<div class="clearfix"></div>
+	        	<div class="col-md-12" ng-repeat="(k2, v2) in v" ng-if="k2 == 'UserCartDetail'">
+	        		<div class="product clearfix" ng-repeat="(k3, v3) in v2">
+		        		<div class="col-xs-2">
+		        			<img ng-src="{{ v3.ShopBrochureProduct.image }}">
+			        	</div>
+			        	<div class="col-xs-6">
+			        		<p>{{ v3.ShopBrochureProduct.Product.code }}</p>
+			        		<p>{{ v3.ShopBrochureProduct.Product.name }}</p>
+			        		<p>${{ v3.ShopBrochureProduct.Product.price }}</p>
+			        		<p>{{ v3.ShopBrochureProduct.ShopBrochure.name + '-' + v3.ShopBrochureProduct.ShopBrochure.CampaignShopBrochure[0].Campaign.name + ' ' + v3.ShopBrochureProduct.ShopBrochure.CampaignShopBrochure[0].Campaign.start_date}}</p>
+			        	</div>
+			        	<div class="col-xs-4 actions">
+			        		<a href class="icn icn-remove" ng-click="remove(v3.id)"></a>
+			        		<input type="number" value="{{ v3.quantity }}">
+			        		<div class="clearfix"></div>
+			        	</div>
+	        		</div>
+	        	</div>
+	        </div>
+	        <a ng-controller="CartController" ng-click="send()" class="btn btn-danger"  ng-if="User.userTypeid != 3">Enviar Pedido</a>
+        </div>
+		<div class="row" ng-if="!UserCartDeteail[0]">
+			<h1>Lista de Productos: No tiene productos seleccionados.</h1>
+		</div>
+    </div>
+</div>

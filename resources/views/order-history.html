@@ -1,0 +1,57 @@
+<div ng-include src="'resources/partials/nav.html'"></div>
+<div id="order-history" ng-init="init()">
+    <div class="container">
+        <div class="row" ng-if="Orders[0]">
+	        <div class="pull-left">
+	        	<h1>Historial de Pedidos</h1>
+	        	<h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+	        </div>
+            <div class="row">
+            	<div class="col-xs-2 pull-right per-page">
+	            	<label for="search">Pedidos por página:</label>
+	              	<input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+	            </div>
+            </div>
+	        <div class="col-xs-12">
+	        	<table class="table table-condensed">
+				    <thead>
+				        <tr>
+				            <th>
+				            	<span>
+				            		<a href ng-click="predicate = 'purchase_date'; reverse=false" class="icn icn-arrow-up"></a>
+				            		<a href ng-click="predicate = 'purchase_date'; reverse=true" class="icn icn-arrow-down"></a>
+				            	</span>
+				            	Fecha del pedido
+				            </th>
+				            <th>
+				            	<span>
+				            		<a href ng-click="predicate = 'total_quantity'; reverse=false" class="icn icn-arrow-up"></a>
+				            		<a href ng-click="predicate = 'total_quantity'; reverse=true" class="icn icn-arrow-down"></a>
+				            	</span>
+				            	Productos
+				            </th>
+				            <th><i class="icn icn-print-2"></i>Imprimir Listados</th>
+				        </tr>
+				    </thead>
+				    <tbody>
+				        <tr dir-paginate="v in Orders | filter:q | itemsPerPage: pageSize | orderBy:predicate:reverse" current-page="currentPage">
+				            <td>{{ v[0].UserCart.purchase_date }}</td>
+				            <td>{{ v.total_quantity }}</td>
+				            <td>
+				            	<a target="_blank" href="#/print-orders-by-products/{{v[0].UserCart.purchase_date_unix}}" class="btn btn-info">POR PEDIDO</a>
+				            	<a target="_blank" href="#/print-orders-by-customers/{{v[0].UserCart.purchase_date_unix}}" class="btn btn-info">POR CLIENTE</a>
+				            </td>
+				        </tr>
+				    </tbody>
+				</table>
+	        </div>
+	        <div class="clearfix"></div>
+	        <div class="text-center">
+          		<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="resources/js/directives/pagination/dirPagination.tpl.html"></dir-pagination-controls>
+          	</div>
+        </div>
+        <div class="row" ng-if="!Orders[0]">
+        	<h1>Historial de Pedidos: no posee pedidos actualmente.</h1>
+        </div>
+    </div>
+</div>
